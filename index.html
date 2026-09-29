@@ -263,8 +263,10 @@ function url(slug){ return "https://"+slug+"."+base; }
 
 const catalog = document.getElementById("catalog");
 let total = 0;
+const prerendered = !!catalog.querySelector("section.cat"); // 허브 동기화가 넣은 정적 카드(검색 로봇용)가 있으면 다시 그리지 않음
 CATS.forEach(cat=>{
   total += cat.items.length;
+  if (prerendered) return;
   const sec = document.createElement("section");
   sec.className = "cat";
   sec.innerHTML = `<h2>${cat.icon} ${cat.name}</h2><p class="desc">${cat.desc}</p>`;
